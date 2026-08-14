@@ -1,0 +1,23 @@
+# Spring Boot / Java
+demonewspring/target/
+*.class
+
+# Maven
+.mvn/timing.properties
+
+# React / Node
+employee-frontend/node_modules/
+employee-frontend/dist/
+
+# Environment files
+.env
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
