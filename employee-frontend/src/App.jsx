@@ -6,6 +6,7 @@ function App() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('');
+  const [employees, setEmployees] = useState([]);
 
   const saveEmployee = async () => {
     const employee = {
@@ -20,6 +21,12 @@ function App() {
     );
 
     console.log(response.data);
+  };
+
+  const getEmployees = async () => {
+  const response = await axios.get('http://localhost:8080/emp/display');
+
+  setEmployees(response.data);
   };
 
   return (
@@ -38,6 +45,33 @@ function App() {
       </div>
       <div>
         <button type="button" onClick={saveEmployee}>Submit</button>
+      </div>
+      <div>
+        <button type="button" onClick={getEmployees}>
+          View Employees
+        </button>
+      </div><br />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <table border="1" >
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Department</th>
+            </tr>
+          </thead>
+          <tbody>
+          {employees.map((employee) => (
+            <tr key={employee.id}>
+              <td>{employee.id}</td>
+              <td>{employee.name}</td>
+              <td>{employee.email}</td>
+              <td>{employee.department}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
       </div>
     </div>
     </>

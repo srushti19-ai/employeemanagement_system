@@ -1,6 +1,9 @@
 package com.example.demonewspring.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +25,10 @@ public class EmployeeController {
 	@PostMapping("/all")
 	public Employee savealldata(@RequestBody Employee employee) {
 		return empservice.savedata(employee);
+	}
+	
+	@GetMapping("/display")
+	public List<Employee> showalldata() {
+		return empservice.showdata(null);
 	}
 }
