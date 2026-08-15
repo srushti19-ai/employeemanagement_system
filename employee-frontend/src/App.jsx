@@ -7,6 +7,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('');
   const [employees, setEmployees] = useState([]);
+  const [deleteId, setDeleteId] = useState('');
 
   const saveEmployee = async () => {
     const employee = {
@@ -29,6 +30,13 @@ function App() {
   setEmployees(response.data);
   };
 
+  const deleteEmployee = async () => {
+  await axios.delete(`http://localhost:8080/emp/${deleteId}`);
+
+  getEmployees();
+  setDeleteId('');
+  };
+
   return (
     <>
     <div border='2px solid black' >
@@ -49,6 +57,18 @@ function App() {
       <div>
         <button type="button" onClick={getEmployees}>
           View Employees
+        </button>
+      </div>
+      <div>
+        <input
+          type="number"
+          value={deleteId}
+          onChange={(e) => setDeleteId(e.target.value)}
+          placeholder="Enter Employee ID"
+        />
+
+        <button type="button" onClick={deleteEmployee}>
+          Delete Employee
         </button>
       </div><br />
       <div style={{ display: 'flex', justifyContent: 'center' }}>

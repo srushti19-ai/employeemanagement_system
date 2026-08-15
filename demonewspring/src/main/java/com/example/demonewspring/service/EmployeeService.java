@@ -20,4 +20,7 @@ public class EmployeeService {
     public List<Employee> showdata(Employee employee) {
     	    return emprepo.findAll();
     }
+    public void deletedata(Long id) {
+    	    emprepo.deleteById(id);
+    }
 }
