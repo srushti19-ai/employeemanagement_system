@@ -23,4 +23,15 @@ public class EmployeeService {
     public void deletedata(Long id) {
     	    emprepo.deleteById(id);
     }
+    public Employee updatedata(Long id, Employee employee) {
+
+        Employee existingEmployee = emprepo.findById(id)
+                .orElseThrow();
+
+        existingEmployee.setName(employee.getName());
+        existingEmployee.setEmail(employee.getEmail());
+        existingEmployee.setDepartment(employee.getDepartment());
+
+        return emprepo.save(existingEmployee);
+    }
 }

@@ -9,6 +9,11 @@ function App() {
   const [employees, setEmployees] = useState([]);
   const [deleteId, setDeleteId] = useState('');
 
+  const [updateId, setUpdateId] = useState('');
+  const [updateName, setUpdateName] = useState('');
+  const [updateEmail, setUpdateEmail] = useState('');
+  const [updateDepartment, setUpdateDepartment] = useState('');
+
   const saveEmployee = async () => {
     const employee = {
     name: name,
@@ -35,6 +40,23 @@ function App() {
 
   getEmployees();
   setDeleteId('');
+  };
+
+  const updateEmployee = async () => {
+  const employee = {
+    name: updateName,
+    email: updateEmail,
+    department: updateDepartment
+  };
+
+  const response = await axios.put(
+    `http://localhost:8080/emp/update/${updateId}`,
+    employee
+  );
+
+  console.log(response.data);
+
+  getEmployees();
   };
 
   return (
@@ -93,6 +115,28 @@ function App() {
           </tbody>
         </table>
       </div>
+
+      <div>
+        <div>
+          <input type="number" value={updateId} onChange={(e) => setUpdateId(e.target.value)}
+          placeholder="Enter Employee ID"/>
+        </div>
+        <div>
+          <input type="text" value={updateName} onChange={(e) => setUpdateName(e.target.value)} placeholder="Enter your name"  />
+        </div>
+        <div>
+          <input type="email" value={updateEmail} onChange={(e) => setUpdateEmail(e.target.value)} placeholder="Enter your email" />
+        </div>
+        <div>
+          <input type="text" value={updateDepartment} onChange={(e) => setUpdateDepartment(e.target.value)} placeholder="Enter your Department" />
+        </div>
+        <div>
+          <button type="button" onClick={updateEmployee}>
+            Update Employee
+          </button>
+        </div>
+      </div>
+
     </div>
     </>
   )
