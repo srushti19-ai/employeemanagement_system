@@ -34,4 +34,8 @@ public class EmployeeService {
 
         return emprepo.save(existingEmployee);
     }
+    public Employee getEmployeeById(Long id) {
+        return emprepo.findById(id)
+                .orElseThrow();
+    }
 }

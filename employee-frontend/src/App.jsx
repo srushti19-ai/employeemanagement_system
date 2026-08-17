@@ -59,6 +59,16 @@ function App() {
   getEmployees();
   };
 
+  const loadEmployee = async () => {
+  const response = await axios.get(
+    `http://localhost:8080/emp/${updateId}`
+  );
+
+  setUpdateName(response.data.name);
+  setUpdateEmail(response.data.email);
+  setUpdateDepartment(response.data.department);
+  };
+
   return (
     <>
     <div border='2px solid black' >
@@ -120,6 +130,11 @@ function App() {
         <div>
           <input type="number" value={updateId} onChange={(e) => setUpdateId(e.target.value)}
           placeholder="Enter Employee ID"/>
+        </div>
+        <div>
+          <button type="button" onClick={loadEmployee}>
+            Load Employee
+          </button>
         </div>
         <div>
           <input type="text" value={updateName} onChange={(e) => setUpdateName(e.target.value)} placeholder="Enter your name"  />
